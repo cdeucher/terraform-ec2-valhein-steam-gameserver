@@ -18,6 +18,8 @@ resource "aws_instance" "web-server-instance" {
   instance_type     = "t2.small"
   availability_zone = "us-east-1a"
   key_name          = "private_key" 
+  # This EC2 Instance has a public IP and will be accessible directly from the public Internet
+  #associate_public_ip_address = true
 
   network_interface{
       device_index = 0
@@ -34,7 +36,13 @@ resource "aws_instance" "web-server-instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "echo 123;",
+          "sudo apt update -y",
+          "sudo dpkg --add-architecture i386",
+          "sudo apt -y update",
+          "sudo mkdir -p /data/lgsm/data",
+          "sudo chmod -R 777 /data",
+          "sudo apt install -y curl wget file tar bzip2 gzip unzip bsdmainutils python util-linux ca-certificates binutils bc jq tmux netcat lib32gcc1 lib32stdc++6",
+          "sudo apt install -y libsdl2-2.0-0:i386"
     ]
   }*/
    
@@ -51,7 +59,9 @@ resource "aws_instance" "web-server-instance" {
 
                 sudo mkfs -t xfs /dev/xvdd
                 sudo mount /dev/xvdd /data
-
+                
+                cd /data && ./vhserver start
+                
                 #sudo apt -y install steamcmd
                 #sudo wget -O linuxgsm.sh https://linuxgsm.sh
                 #sudo chmod -R 777 /data
