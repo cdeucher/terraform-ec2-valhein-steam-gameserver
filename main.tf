@@ -52,16 +52,20 @@ resource "aws_instance" "web-server-instance" {
                 sudo apt update -y
                 sudo dpkg --add-architecture i386
                 sudo apt -y update
-                sudo mkdir -p /data/lgsm/data
                 sudo chmod -R 777 /data
                 sudo apt install -y curl wget file tar bzip2 gzip unzip bsdmainutils python util-linux ca-certificates binutils bc jq tmux netcat lib32gcc1 lib32stdc++6 
                 sudo apt install -y libsdl2-2.0-0:i386
-
-                sudo mkfs -t xfs /dev/xvdd
+                sudo apt -y install steamcmd --license
                 sudo mount /dev/xvdd /data
                 
                 cd /data && ./vhserver start
                 
+
+                #
+                # SETUP VOLUME (only new volumes)
+                #
+                #sudo mkfs -t xfs /dev/xvdd
+                #sudo mkdir -p /data/lgsm/data
                 #sudo apt -y install steamcmd
                 #sudo wget -O linuxgsm.sh https://linuxgsm.sh
                 #sudo chmod -R 777 /data
