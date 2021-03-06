@@ -52,9 +52,9 @@ resource "null_resource" "bash_remote" {
                 ,"sudo apt-get -qq -y install libsdl2-2.0-0:i386"
                 ,"sudo mount /dev/xvdd /data"
                 ,"mkdir -p ~/.config/unity3d/IronGate/Valheim/worlds"
-                ,"sudo rsync -avuz /data/world_dir/* ~/.config/unity3d/IronGate/Valheim/worlds/"
-                ,"sudo cat '*/5 * * * * /data/save_worlds.sh' > /etc/cron.d/custom"
-                ,"sudo sudo /etc/init.d/cron restart"
+                ,"sudo rsync -avuz /data/world_dir/worlds/* ~/.config/unity3d/IronGate/Valheim/worlds/"
+                #,"sudo cat '*/5 * * * * /data/save_worlds.sh' > /etc/cron.d/custom"
+                #,"sudo sudo /etc/init.d/cron restart"
                 #,"sudo apt-get -qq -y install steamcmd"
                 #,"cd /data && ./vhserver start"                                
     ]
@@ -69,7 +69,7 @@ resource "null_resource" "bash_remote" {
                 # vi save_worlds.sh
                 # #!/bin/bash
                 # rsync -avuz ~/.config/unity3d/IronGate/Valheim/worlds /data/world_dir 
-                
+
                 #ls -la ~/.config/unity3d/IronGate/Valheim/worlds/
                 #5 * * * * /data/save_worlds.sh > /dev/null 2>&1
                 #sudo mkfs -t xfs /dev/xvdd
