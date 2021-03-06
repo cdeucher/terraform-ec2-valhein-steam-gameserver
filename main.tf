@@ -15,7 +15,7 @@ resource "aws_eip" "one" {
 
 resource "aws_instance" "web-server-instance" {
   ami               = "ami-02fe94dee086c0c37"
-  instance_type     = "t2.small"
+  instance_type     = "t2.medium"
   availability_zone = "us-east-1a"
   key_name          = "private_key" 
   # This EC2 Instance has a public IP and will be accessible directly from the public Internet
@@ -55,15 +55,17 @@ resource "aws_instance" "web-server-instance" {
                 sudo chmod -R 777 /data
                 sudo apt install -y curl wget file tar bzip2 gzip unzip bsdmainutils python util-linux ca-certificates binutils bc jq tmux netcat lib32gcc1 lib32stdc++6 
                 sudo apt install -y libsdl2-2.0-0:i386
-                sudo apt -y install steamcmd --license
+                #sudo apt -y install steamcmd
                 sudo mount /dev/xvdd /data
                 
-                cd /data && ./vhserver start
+                #cd /data && ./vhserver start
                 
 
                 #
                 # SETUP VOLUME (only new volumes)
                 #
+                #ls -la ~/.config/unity3d/IronGate/Valheim/worlds/
+                #*/5 * * * * /data/save_worlds.sh > /dev/null 2>&1
                 #sudo mkfs -t xfs /dev/xvdd
                 #sudo mkdir -p /data/lgsm/data
                 #sudo apt -y install steamcmd
